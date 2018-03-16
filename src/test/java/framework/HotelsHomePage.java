@@ -24,7 +24,7 @@ public class HotelsHomePage extends BasePage{
 
 
     public void clickOnSearchAndSendInput(){
-        clickOn(overLayButton);
+        //clickOn(overLayButton);
         sendText(destinationSearchField,"minnesota");
     }
     public void selectDestinationFromList(){
@@ -66,6 +66,7 @@ public class HotelsHomePage extends BasePage{
 
         clickOn(By.xpath("//*[@id=\"main-content\"]/main/div[2]/div/div[1]/div/div[1]/div[1]/div/div/form/div[5]/button"));
     }
+
 
 
 }

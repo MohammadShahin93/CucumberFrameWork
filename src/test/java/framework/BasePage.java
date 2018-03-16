@@ -33,19 +33,24 @@ public class BasePage {
 
 	}
 
-	public void selectAutoCompleteByText(By locator, String string) {
+	public void selectAutoCompleteByText(By locator, String stringOne) {
 		try {
 			List<WebElement> list = SharedSD.getDriver().findElements(locator);
 
 			for (WebElement elements : list) {
 
-				if (elements.getText().equals(string)) {
+				if (elements.getText().equals(stringOne)) {
+					Thread.sleep(4000);
 					elements.click();
 					break;
 				}
 			}
 		} catch (NoSuchElementException e) {
 			Assert.fail("Element is not found with this locator: " + locator.toString());
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (StaleElementReferenceException e){
 			e.printStackTrace();
 		}
 	}
@@ -56,6 +61,8 @@ public class BasePage {
 			dropdown.selectByIndex(index);
 		} catch (NoSuchElementException e) {
 			Assert.fail("Element is not found with this locator: " + locator.toString());
+			e.printStackTrace();
+		} catch (StaleElementReferenceException e) {
 			e.printStackTrace();
 		}
 	}

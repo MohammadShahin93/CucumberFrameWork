@@ -67,4 +67,9 @@ public class HotelsHomePage extends BasePage{
         clickOn(By.xpath("//*[@id=\"main-content\"]/main/div[2]/div/div[1]/div/div[1]/div[1]/div/div/form/div[5]/button"));
     }
 
+    public void test(){
+        System.out.println("Hello");
+        System.out.println("Test");
+    }
+
 }

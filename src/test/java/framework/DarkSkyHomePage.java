@@ -19,7 +19,7 @@ public class DarkSkyHomePage extends BasePage {
     private By days = By.className("name");
     private By TodaysLocator = By.xpath("//*[@id=\"week\"]/a[1]/span[1]/span[2]");
     private By actualDate = By.className("date");
-    private By dateVisible = By.xpath("//*[@id=\"main\"]/div[1]/div[1]/div");
+    private By dateVisible = By.cssSelector("#main > div.dayDetails.center > div.title > div");
     private SimpleDateFormat sdf = new SimpleDateFormat("d");
     private By timeMachine = By.cssSelector("#timeMachine > div.buttonContainer > a");
     private By eachDay = By.tagName("td");
@@ -91,7 +91,7 @@ public class DarkSkyHomePage extends BasePage {
     }
 
     public void clickTimeMachine() {
-        clickOn(By.xpath("//*[@id=\"timeMachine\"]/div[2]/a"));
+        clickOn(timeMachine);
     }
 
     //Selects current date from list

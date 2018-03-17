@@ -23,26 +23,33 @@ public class HotelsHomePage extends BasePage{
     }
 
 
-    public void clickOnSearchAndSendInput(){
+    public void clickOnSearchAndSendInput() throws InterruptedException {
         //clickOn(overLayButton);
         sendText(destinationSearchField,"minnesota");
+        Thread.sleep(2000);
     }
     public void selectDestinationFromList() throws InterruptedException {
-        selectAutoCompleteByText(By.className("autosuggest-category-result"),"Minnesota City, Minnesota, United States of America");
+        selectAutoCompleteByText(By.xpath("//div[@class='autosuggest-category-result']"),"Minnesota City, Minnesota, United States of America");
 
     }
 
     public void selectDateFromCalendar() throws StaleElementReferenceException {
         try {
+            // creating an object sdf of SimpleDateFormat with the pattern "d" which displays days in the calendar by Day
             SimpleDateFormat sdf = new SimpleDateFormat("d");
+            // Creating instance of Calendar
             Calendar cal = Calendar.getInstance();
+            //Date returns todays date
+            //Adding 1 day to the object "cal" to get tomorrows date
             cal.add(Calendar.DATE, 1);
+            // Formatting cal object by sdf format "d" and storing it in tomorrowsDate variable
             String tomorrowsDate = sdf.format(cal.getTime());
-            clickOn(By.cssSelector("#qf-0q-localised-check-in"));
+
+            clickOn(By.id("qf-0q-localised-check-in"));
 
             clickOn(By.linkText(tomorrowsDate));
 
-            clickOn(By.cssSelector("#qf-0q-localised-check-out"));
+            clickOn(By.id("qf-0q-localised-check-out"));
 
             cal.add(Calendar.DATE, 6);
             clickOn(By.linkText(sdf.format(cal.getTime())));
@@ -51,7 +58,7 @@ public class HotelsHomePage extends BasePage{
         }
     }
 
-    public void selectAdultsFromDropDown(){
+    public void selectPeopleFromDropDown(){
 
         selectDropDown(By.cssSelector("#qf-0q-compact-occupancy"),2);
         selectDropDown(By.cssSelector("#qf-0q-room-0-adults"),1);

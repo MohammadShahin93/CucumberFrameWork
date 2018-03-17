@@ -19,11 +19,11 @@ public class DarkSkyHomePage extends BasePage {
     private By days = By.className("name");
     private By TodaysLocator = By.xpath("//*[@id=\"week\"]/a[1]/span[1]/span[2]");
     private By actualDate = By.className("date");
-    private By dateVisible = By.cssSelector("#main > div.dayDetails.center > div.title > div");
+    private By dateVisible = By.xpath("//*[@id=\"main\"]/div[1]/div[1]/div");
     private SimpleDateFormat sdf = new SimpleDateFormat("d");
-    private By timeMachine = By.cssSelector("#timeMachine > div.buttonContainer > a");
+    private By timeMachine = By.xpath("//*[@id=\"timeMachine\"]/div[2]/a");
     private By eachDay = By.tagName("td");
-    private By calendarWidget = By.className("calendar");
+    private By calendarWidget = By.xpath("//*[@id=\"timeMachine\"]/div[3]/div/div/div");
 
     List<String> actualDays = new ArrayList<>();//creates list of actual days
 
@@ -105,7 +105,10 @@ public class DarkSkyHomePage extends BasePage {
         String tomorrowsDate = sdf.format(calendar.getTime());
         clickOn(timeMachine);
 
+
+        //clean up
         WebElement dateFromCalendar = SharedSD.getDriver().findElement(calendarWidget);
+       //review
         List<WebElement> dayElement = dateFromCalendar.findElements(eachDay);
 
         for (WebElement day : dayElement) {
@@ -120,6 +123,8 @@ public class DarkSkyHomePage extends BasePage {
     }
 
     public void verifyDateNotClickable() {
+
+        //try catch block, check the href, assertion to display it is not clickable
         WebElement isItClickable = SharedSD.getDriver().findElement(dateVisible);
 
         Assert.assertFalse(isItClickable.isSelected());

@@ -38,7 +38,7 @@ public class HotelsSD {
     @And("^I select 2 adults and 2 children$")
     public void selectTravelers() throws InterruptedException{
 
-        hotelsHomePage.selectAdultsFromDropDown();
+        hotelsHomePage.selectPeopleFromDropDown();
     }
 
     @And("^I select ages 2 and 4 for the children$")

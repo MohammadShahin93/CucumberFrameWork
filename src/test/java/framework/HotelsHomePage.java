@@ -27,24 +27,28 @@ public class HotelsHomePage extends BasePage{
         //clickOn(overLayButton);
         sendText(destinationSearchField,"minnesota");
     }
-    public void selectDestinationFromList(){
+    public void selectDestinationFromList() throws InterruptedException {
         selectAutoCompleteByText(By.className("autosuggest-category-result"),"Minnesota City, Minnesota, United States of America");
 
     }
 
-    public void selectDateFromCalendar(){
-        SimpleDateFormat sdf = new SimpleDateFormat("d");
-        Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.DATE,1);
-        String tomorrowsDate = sdf.format(cal.getTime());
-        clickOn(By.cssSelector("#qf-0q-localised-check-in"));
+    public void selectDateFromCalendar() throws StaleElementReferenceException {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("d");
+            Calendar cal = Calendar.getInstance();
+            cal.add(Calendar.DATE, 1);
+            String tomorrowsDate = sdf.format(cal.getTime());
+            clickOn(By.cssSelector("#qf-0q-localised-check-in"));
 
-        clickOn(By.linkText(tomorrowsDate));
+            clickOn(By.linkText(tomorrowsDate));
 
-        clickOn(By.cssSelector("#qf-0q-localised-check-out"));
+            clickOn(By.cssSelector("#qf-0q-localised-check-out"));
 
-        cal.add(Calendar.DATE, 6);
-        clickOn(By.linkText(sdf.format(cal.getTime())));
+            cal.add(Calendar.DATE, 6);
+            clickOn(By.linkText(sdf.format(cal.getTime())));
+        } catch (StaleElementReferenceException e) {
+            e.printStackTrace();
+        }
     }
 
     public void selectAdultsFromDropDown(){

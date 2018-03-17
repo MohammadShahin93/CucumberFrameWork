@@ -33,7 +33,7 @@ public class BasePage {
 
 	}
 
-	public void selectAutoCompleteByText(By locator, String stringOne) {
+	public void selectAutoCompleteByText(By locator, String stringOne) throws StaleElementReferenceException, InterruptedException {
 		try {
 			List<WebElement> list = SharedSD.getDriver().findElements(locator);
 
@@ -45,12 +45,8 @@ public class BasePage {
 					break;
 				}
 			}
-		} catch (NoSuchElementException e) {
+		}  catch (StaleElementReferenceException e){
 			Assert.fail("Element is not found with this locator: " + locator.toString());
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} catch (StaleElementReferenceException e){
 			e.printStackTrace();
 		}
 	}
@@ -104,6 +100,8 @@ public class BasePage {
 			SharedSD.getDriver().findElement(locator).sendKeys(text);
 		} catch (NoSuchElementException e) {
 			Assert.fail("Element is not found with this locator: " + locator.toString());
+			e.printStackTrace();
+		} catch (StaleElementReferenceException e){
 			e.printStackTrace();
 		}
 	}

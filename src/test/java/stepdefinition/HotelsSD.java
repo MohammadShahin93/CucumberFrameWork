@@ -18,37 +18,37 @@ public class HotelsSD {
         hotelsHomePage.verifyHotelsHomePage();
     }
     @When("^I type in Minnesota in Destination search field$")
-    public void enterCityToDestination() {
+    public void enterCityToDestination() throws InterruptedException{
 
         hotelsHomePage.clickOnSearchAndSendInput();
     }
 
     @And("^I select Minnesota from the suggested list$")
-    public void clickDesiredCity() {
+    public void clickDesiredCity() throws InterruptedException {
 
         hotelsHomePage.selectDestinationFromList();
     }
 
     @And("^I check in for 6 days starting tomorrow$")
-    public void selectCalendarDates() {
+    public void selectCalendarDates() throws InterruptedException{
 
         hotelsHomePage.selectDateFromCalendar();
     }
 
     @And("^I select 2 adults and 2 children$")
-    public void selectTravelers() {
+    public void selectTravelers() throws InterruptedException{
 
         hotelsHomePage.selectAdultsFromDropDown();
     }
 
     @And("^I select ages 2 and 4 for the children$")
-    public void selectAgesOfChildren() {
+    public void selectAgesOfChildren() throws InterruptedException{
 
         hotelsHomePage.selectAgeOfChildren();
     }
 
     @Then("^I click on search for hotels$")
-    public void clickSearch() {
+    public void clickSearch() throws InterruptedException{
 
         hotelsHomePage.clickSearchButton();
     }

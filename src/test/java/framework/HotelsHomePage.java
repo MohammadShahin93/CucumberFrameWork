@@ -39,7 +39,7 @@ public class HotelsHomePage extends BasePage{
             SimpleDateFormat sdf = new SimpleDateFormat("d");
             // Creating instance of Calendar
             Calendar cal = Calendar.getInstance();
-            //Date returns todays date
+
             //Adding 1 day to the object "cal" to get tomorrows date
             cal.add(Calendar.DATE, 1);
             // Formatting cal object by sdf format "d" and storing it in tomorrowsDate variable

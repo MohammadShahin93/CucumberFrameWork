@@ -51,7 +51,7 @@ public class BasePage {
 		}
 	}
 
-	public void selectDropDown(By locator, int index) {
+	public void selectDropDown(By locator, int index) throws StaleElementReferenceException{
 		try {
 			Select dropdown = new Select(SharedSD.getDriver().findElement(locator));
 			dropdown.selectByIndex(index);

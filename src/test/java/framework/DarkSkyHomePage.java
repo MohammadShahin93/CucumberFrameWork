@@ -20,10 +20,10 @@ public class DarkSkyHomePage extends BasePage {
     private By TodaysLocator = By.xpath("//*[@id=\"week\"]/a[1]/span[1]/span[2]");
     private By actualDate = By.className("date");
     private By dateVisible = By.xpath("//*[@id=\"main\"]/div[1]/div[1]/div");
-    private SimpleDateFormat sdf = new SimpleDateFormat("d");
     private By timeMachine = By.xpath("//*[@id=\"timeMachine\"]/div[2]/a");
     private By eachDay = By.tagName("td");
     private By calendarWidget = By.xpath("//*[@id=\"timeMachine\"]/div[3]/div/div/div");
+    SimpleDateFormat sdf = new SimpleDateFormat("d");
 
     List<String> actualDays = new ArrayList<>();//creates list of actual days
 

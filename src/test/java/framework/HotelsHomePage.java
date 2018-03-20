@@ -17,6 +17,14 @@ public class HotelsHomePage extends BasePage{
 
     private By overLayButton = By.xpath("//*[@id=\"managed-overlay\"]/button");
     private By destinationSearchField = By.cssSelector("#qf-0q-destination");
+    private By clickonCheckIn = By.id("qf-0q-localised-check-in");
+    private By clickOnCheckOut = By.id("qf-0q-localised-check-out");
+    private By roomDropDown = By.cssSelector("#qf-0q-compact-occupancy");
+    private By selectNumberOfAdults = By.cssSelector("#qf-0q-room-0-adults");
+    private By selectNumberOfChildren = By.cssSelector("#qf-0q-room-0-children");
+    private By firstChildsAge = By.cssSelector("#qf-0q-room-0-child-0-age");
+    private By secondChildsAge = By.cssSelector("#qf-0q-room-0-child-1-age");
+    private By clickSearchButton = By.xpath("//*[@id=\"main-content\"]/main/div[2]/div/div[1]/div/div[1]/div[1]/div/div/form/div[5]/button");
 
     public void verifyHotelsHomePage(){
         Assert.assertEquals(SharedSD.getDriver().getTitle(),"Hotels.com - Cheap Hotels, Discount Rates & Hotel Deals");
@@ -45,11 +53,11 @@ public class HotelsHomePage extends BasePage{
             // Formatting cal object by sdf format "d" and storing it in tomorrowsDate variable
             String tomorrowsDate = sdf.format(cal.getTime());
 
-            clickOn(By.id("qf-0q-localised-check-in"));
+            clickOn(clickonCheckIn);
 
             clickOn(By.linkText(tomorrowsDate));
 
-            clickOn(By.id("qf-0q-localised-check-out"));
+            clickOn(clickOnCheckOut);
 
             cal.add(Calendar.DATE, 6);
             clickOn(By.linkText(sdf.format(cal.getTime())));
@@ -60,22 +68,22 @@ public class HotelsHomePage extends BasePage{
 
     public void selectPeopleFromDropDown(){
 
-        selectDropDown(By.cssSelector("#qf-0q-compact-occupancy"),2);
-        selectDropDown(By.cssSelector("#qf-0q-room-0-adults"),1);
-        selectDropDown(By.cssSelector("#qf-0q-room-0-children"),2);
+        selectDropDown(roomDropDown,2);
+        selectDropDown(selectNumberOfAdults,1);
+        selectDropDown(selectNumberOfChildren,2);
 
     }
 
     public void selectAgeOfChildren() {
 
-        selectDropDown(By.cssSelector("#qf-0q-room-0-child-0-age"), 2);
+        selectDropDown(firstChildsAge, 2);
 
-        selectDropDown(By.cssSelector("#qf-0q-room-0-child-1-age"), 4);
+        selectDropDown(secondChildsAge, 4);
     }
 
     public void clickSearchButton() {
 
-        clickOn(By.xpath("//*[@id=\"main-content\"]/main/div[2]/div/div[1]/div/div[1]/div[1]/div/div/form/div[5]/button"));
+        clickOn(clickSearchButton);
     }
 
 

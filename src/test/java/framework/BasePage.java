@@ -337,9 +337,7 @@ public class BasePage {
 		SharedSD.getDriver().navigate().refresh();
 	}
 
-	/**
-	 * Import from util Maven testNG
-	 */
+
 
 	//Implicit wait
 	public static void implicitWait(String url, By locator) {

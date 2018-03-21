@@ -7,6 +7,7 @@ import org.testng.Assert;
 import stepdefinition.SharedSD;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -15,6 +16,10 @@ import java.util.List;
  */
 public class HotelsHomePage extends BasePage{
 
+    private String hotelTitle = "Hotels.com - Cheap Hotels, Discount Rates & Hotel Deals";
+    private String stateName = "minnesota";
+    private By listOfCity = By.xpath("//div[@class='autosuggest-category-result']");
+    private String chooseCity = "Minnesota City, Minnesota, United States of America";
     private By overLayButton = By.xpath("//*[@id=\"managed-overlay\"]/button");
     private By destinationSearchField = By.cssSelector("#qf-0q-destination");
     private By clickonCheckIn = By.id("qf-0q-localised-check-in");
@@ -22,22 +27,26 @@ public class HotelsHomePage extends BasePage{
     private By roomDropDown = By.cssSelector("#qf-0q-compact-occupancy");
     private By selectNumberOfAdults = By.cssSelector("#qf-0q-room-0-adults");
     private By selectNumberOfChildren = By.cssSelector("#qf-0q-room-0-children");
-    private By firstChildsAge = By.cssSelector("#qf-0q-room-0-child-0-age");
-    private By secondChildsAge = By.cssSelector("#qf-0q-room-0-child-1-age");
+    private By firstChildsAge = By.id("qf-0q-room-0-child-0-age");
+    private By secondChildsAge = By.id("qf-0q-room-0-child-1-age");
     private By clickSearchButton = By.xpath("//*[@id=\"main-content\"]/main/div[2]/div/div[1]/div/div[1]/div[1]/div/div/form/div[5]/button");
+    private By hotelsDisplayed = By.id("listings");
+
+
+
 
     public void verifyHotelsHomePage(){
-        Assert.assertEquals(SharedSD.getDriver().getTitle(),"Hotels.com - Cheap Hotels, Discount Rates & Hotel Deals");
+        Assert.assertEquals(SharedSD.getDriver().getTitle(),hotelTitle);
     }
 
 
     public void clickOnSearchAndSendInput() throws InterruptedException {
         //clickOn(overLayButton);
-        sendText(destinationSearchField,"minnesota");
+        sendText(destinationSearchField,stateName);
         Thread.sleep(2000);
     }
     public void selectDestinationFromList() throws InterruptedException {
-        selectAutoCompleteByText(By.xpath("//div[@class='autosuggest-category-result']"),"Minnesota City, Minnesota, United States of America");
+        selectAutoCompleteByText(listOfCity,chooseCity);
 
     }
 
@@ -66,11 +75,12 @@ public class HotelsHomePage extends BasePage{
         }
     }
 
-    public void selectPeopleFromDropDown(){
+    public void selectPeopleFromDropDown() throws InterruptedException {
 
         selectDropDown(roomDropDown,2);
         selectDropDown(selectNumberOfAdults,1);
         selectDropDown(selectNumberOfChildren,2);
+        Thread.sleep(2000);
 
     }
 
@@ -86,6 +96,17 @@ public class HotelsHomePage extends BasePage{
         clickOn(clickSearchButton);
     }
 
+    public void verifyHotelsDisplayed(){
+        List<String> listOfHotels = new ArrayList<>();
+        List<WebElement> hotelNames = SharedSD.getDriver().findElements(hotelsDisplayed);
+        for (int i = 0; i < hotelNames.size(); i++) {
+            String namesOfHotels = hotelNames.get(i).getText();
+            listOfHotels.add(namesOfHotels);
+            System.out.println(namesOfHotels);
+            break;
+        }
 
-
+            }
 }
+
+

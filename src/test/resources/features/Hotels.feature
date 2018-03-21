@@ -10,5 +10,7 @@
   And I select Minnesota from the suggested list
   And I check in for 6 days starting tomorrow
   And I select 2 adults and 2 children
-  Then I click on search for hotels
+  And I select ages 2 and 4 for the children
+  And I click on search for hotels
+  Then I verify hotels are displayed
 

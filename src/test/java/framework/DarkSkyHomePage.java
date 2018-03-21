@@ -23,13 +23,20 @@ public class DarkSkyHomePage extends BasePage {
     private By timeMachine = By.xpath("//*[@id=\"timeMachine\"]/div[2]/a");
     private By eachDay = By.tagName("td");
     private By calendarWidget = By.xpath("//*[@id=\"timeMachine\"]/div[3]/div/div/div");
+    private By clicksOnTodaysBar = By.xpath("//*[@id=\"week\"]/a[1]/span[1]/span[2]");
+    private By lowTemperature1 = By.xpath("//*[@id=\"week\"]/a[1]/span[2]/span[1]");
+    private By lowTemperature2 = By.xpath("//*[@id=\"week\"]/div[2]/div[1]/div[2]/div[1]/span[1]/span[1]");
+    private By highTemperature1 = By.xpath("//*[@id=\"week\"]/a[1]/span[2]/span[3]");
+    private By highTemperature2 = By.xpath("//*[@id=\"week\"]/div[2]/div[1]/div[2]/div[1]/span[3]/span[1]");
+
     SimpleDateFormat sdf = new SimpleDateFormat("d");
 
     List<String> actualDays = new ArrayList<>();//creates list of actual days
-
     List<String> expectedDays = new ArrayList<>();//Creates a list of expected days
+
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE");
 
+    // gets list of days from DarkSky website
     public void getDaysFromDarkSky() {
 
         List<WebElement> listOfDays = SharedSD.getDriver().findElements(days);
@@ -47,10 +54,11 @@ public class DarkSkyHomePage extends BasePage {
         //adds Today to index 0
         expectedDays.add(0, "Today");
 
+        cal.setTime(new Date()); // adds today's date to cal
 
-        cal.setTime(new Date());
-
-        // count starts with 0
+        // a do while loop which will add 1 day to cal(today)
+        //and format it before adding the days to expected days. The counter will stop before reaching 7 and
+        //print out expected days and actual days. Then it will compare to see if both are equal
         int counter = 0;
         do {
             cal.add(Calendar.DAY_OF_WEEK, 1);
@@ -66,17 +74,17 @@ public class DarkSkyHomePage extends BasePage {
 
 
     }
-
+    //clicks on todays bar
     public void verifyTempClick() {
-        clickOn(By.xpath("//*[@id=\"week\"]/a[1]/span[1]/span[2]"));
+        clickOn(clicksOnTodaysBar);
 
     }
-
+    //gets value of the 2 lows and 2 high temps
     public void verifyTemp() {
-        String lowTemp1 = SharedSD.getDriver().findElement(By.xpath("//*[@id=\"week\"]/a[1]/span[2]/span[1]")).getText();
-        String lowTemp2 = SharedSD.getDriver().findElement(By.xpath("//*[@id=\"week\"]/div[2]/div[1]/div[2]/div[1]/span[1]/span[1]")).getText();
-        String highTemp1 = SharedSD.getDriver().findElement(By.xpath("//*[@id=\"week\"]/a[1]/span[2]/span[3]")).getText();
-        String highTemp2 = SharedSD.getDriver().findElement(By.xpath("//*[@id=\"week\"]/div[2]/div[1]/div[2]/div[1]/span[3]/span[1]")).getText();
+        String lowTemp1 = SharedSD.getDriver().findElement(lowTemperature1).getText();
+        String lowTemp2 = SharedSD.getDriver().findElement(lowTemperature2).getText();
+        String highTemp1 = SharedSD.getDriver().findElement(highTemperature1).getText();
+        String highTemp2 = SharedSD.getDriver().findElement(highTemperature2).getText();
 
 
         Assert.assertEquals(lowTemp1, lowTemp2);
@@ -86,7 +94,6 @@ public class DarkSkyHomePage extends BasePage {
         System.out.println(lowTemp1 + lowTemp2);
 
         System.out.println(highTemp1 + highTemp2);
-
 
     }
 

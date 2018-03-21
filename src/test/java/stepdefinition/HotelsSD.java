@@ -47,9 +47,13 @@ public class HotelsSD {
         hotelsHomePage.selectAgeOfChildren();
     }
 
-    @Then("^I click on search for hotels$")
+    @And("^I click on search for hotels$")
     public void clickSearch() throws InterruptedException{
 
         hotelsHomePage.clickSearchButton();
+    }
+    @Then("^I verify hotels are displayed$")
+    public void verifyHotelsDisplayed()throws InterruptedException{
+        hotelsHomePage.verifyHotelsDisplayed();
     }
 }

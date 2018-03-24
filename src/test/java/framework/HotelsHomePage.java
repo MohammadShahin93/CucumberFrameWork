@@ -25,6 +25,7 @@ public class HotelsHomePage extends BasePage{
     private By clickonCheckIn = By.id("qf-0q-localised-check-in");
     private By clickOnCheckOut = By.id("qf-0q-localised-check-out");
     private By roomDropDown = By.cssSelector("#qf-0q-compact-occupancy");
+    private By actualRoomsSelect = By.id("qf-0q-rooms");
     private By selectNumberOfAdults = By.cssSelector("#qf-0q-room-0-adults");
     private By selectNumberOfChildren = By.cssSelector("#qf-0q-room-0-children");
     private By firstChildsAge = By.id("qf-0q-room-0-child-0-age");
@@ -40,7 +41,7 @@ public class HotelsHomePage extends BasePage{
     }
 
 
-    public void clickOnSearchAndSendInput() throws InterruptedException {
+    public void SendStateInput() throws InterruptedException {
         //clickOn(overLayButton);
         sendText(destinationSearchField,stateName);
         Thread.sleep(2000);
@@ -50,7 +51,7 @@ public class HotelsHomePage extends BasePage{
 
     }
 
-    public void selectDateFromCalendar() throws StaleElementReferenceException {
+    public void selectDateFromCalendar(int amount) throws StaleElementReferenceException, InterruptedException {
         try {
             // creating an object sdf of SimpleDateFormat with the pattern "d" which displays days in the calendar by Day
             SimpleDateFormat sdf = new SimpleDateFormat("d");
@@ -68,27 +69,36 @@ public class HotelsHomePage extends BasePage{
 
             clickOn(clickOnCheckOut);
 
-            cal.add(Calendar.DATE, 6);
+            cal.add(Calendar.DATE, amount);
             clickOn(By.linkText(sdf.format(cal.getTime())));
+            Thread.sleep(2000);
         } catch (StaleElementReferenceException e) {
             e.printStackTrace();
         }
     }
 
-    public void selectPeopleFromDropDown() throws InterruptedException {
+    public void selectIndexOption(int index){
+        selectDropDown(roomDropDown,index);
+    }
 
-        selectDropDown(roomDropDown,2);
-        selectDropDown(selectNumberOfAdults,1);
-        selectDropDown(selectNumberOfChildren,2);
+    public void selectNumOfRooms(int index1){
+        selectDropDown(actualRoomsSelect,index1);
+
+    }
+
+    public void selectPeopleFromDropDown(int index, int index2) throws InterruptedException {
+
+        selectDropDown(selectNumberOfAdults,index);
+        selectDropDown(selectNumberOfChildren,index2);
         Thread.sleep(2000);
 
     }
 
-    public void selectAgeOfChildren() {
+    public void selectAgeOfChildren(int index, int index2) {
 
-        selectDropDown(firstChildsAge, 2);
+        selectDropDown(firstChildsAge, index);
 
-        selectDropDown(secondChildsAge, 4);
+        selectDropDown(secondChildsAge, index2);
     }
 
     public void clickSearchButton() {
@@ -106,7 +116,14 @@ public class HotelsHomePage extends BasePage{
             break;
         }
 
-            }
+    }
+
+    public void verifyHotelsGroup(){
+//       String title = SharedSD.getDriver().getTitle();
+//        System.out.println(title);
+
+        Assert.assertEquals(SharedSD.getDriver().getTitle(),"Group Hotel Quote Request");
+    }
 }
 
 

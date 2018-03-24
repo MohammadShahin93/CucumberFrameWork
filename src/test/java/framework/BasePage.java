@@ -32,7 +32,7 @@ public class BasePage {
 		Thread.sleep(3000);
 
 	}
-
+	// auto complete. Sends a string and if the string matches on the list it clicks on it
 	public void selectAutoCompleteByText(By locator, String stringOne) throws StaleElementReferenceException, InterruptedException {
 		try {
 			List<WebElement> list = SharedSD.getDriver().findElements(locator);
@@ -50,7 +50,7 @@ public class BasePage {
 			e.printStackTrace();
 		}
 	}
-
+	// selects by index from drop down
 	public void selectDropDown(By locator, int index) throws StaleElementReferenceException{
 		try {
 			Select dropdown = new Select(SharedSD.getDriver().findElement(locator));

@@ -11,6 +11,12 @@ import org.testng.Assert;
  * Created by mohammad on 3/13/18.
  */
 public class DarkSkySDT1 {
+    /**
+     * @Task-1
+    Scenario: Verify list of days are in correct order on Dark Sky Website
+    Then I verify days of the week is displayed in correct order
+
+     */
 
     private DarkSkyHomePage darkSkyHomePage = new DarkSkyHomePage();
 
@@ -24,6 +30,8 @@ public class DarkSkySDT1 {
         darkSkyHomePage.getDaysFromDarkSky();
         darkSkyHomePage.getDaysOfWeek();
     }
+
+
 
     public class DarkSkySDT2 {
 
